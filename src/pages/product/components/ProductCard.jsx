@@ -7,7 +7,35 @@ const ProductCardStyled = styled.li`
 
   img {
     width: 100%;
+    object-fit: cover;
     display: block;
+
+    // 데스크톱
+    @media ${({ theme }) => theme.device.desktop} {
+      height: ${(props) => (props.$height ? `${props.$height}px` : "auto")};
+    }
+
+    // 태블릿
+    @media ${({ theme }) => theme.device.tablet} {
+      height: ${(props) =>
+        props.$heightTablet
+          ? `${props.$heightTablet}px`
+          : props.$height
+          ? `${props.$height}px`
+          : "auto"};
+    }
+
+    // 모바일
+    @media ${({ theme }) => theme.device.mobile} {
+      height: ${(props) =>
+        props.$heightMobile
+          ? `${props.$heightMobile}px`
+          : props.$heightTablet
+          ? `${props.$heightTablet}px`
+          : props.$height
+          ? `${props.$height}px`
+          : "auto"};
+    }
   }
 
   .product-info {
@@ -24,9 +52,21 @@ const ProductCardStyled = styled.li`
   }
 `;
 
-function ProductCard({ name, thumbnailUrl, price, favoriteCount }) {
+function ProductCard({
+  name,
+  thumbnailUrl,
+  price,
+  favoriteCount,
+  height,
+  heightTablet,
+  heightMobile,
+}) {
   return (
-    <ProductCardStyled>
+    <ProductCardStyled
+      $height={height}
+      $heightTablet={heightTablet}
+      $heightMobile={heightMobile}
+    >
       <img src={thumbnailUrl} alt={name} />
       <div className="product-info">
         <h3>{name}</h3>

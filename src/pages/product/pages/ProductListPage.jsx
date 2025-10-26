@@ -1,13 +1,26 @@
 import BestProductList from "../module/best-product-list/BestProductList";
 import GeneralProductList from "../module/general-product-list/GeneralProductList";
-import Pagination from "../module/pagination/Pagination";
 import styled from "styled-components";
+
+// 전체 상품 = productList
+function ProductListPage() {
+  return (
+    <ProductListPageStyled>
+      <Section>
+        <h2>베스트 상품</h2>
+        <BestProductList />
+      </Section>
+      <Section>
+        <GeneralProductList />
+      </Section>
+    </ProductListPageStyled>
+  );
+}
 
 const ProductListPageStyled = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 24px 0 58px 0;
-  background: pink;
 `;
 
 const Section = styled.section`
@@ -22,23 +35,11 @@ const Section = styled.section`
     font-weight: 700;
     line-height: 32px;
   }
-`;
 
-// 전체 상품 = productList
-function ProductListPage() {
-  return (
-    <ProductListPageStyled>
-      <Section>
-        <h2>베스트 상품</h2>
-        <BestProductList />
-      </Section>
-      <Section>
-        <h2>전체 상품</h2>
-        <GeneralProductList />
-      </Section>
-      <Pagination />
-    </ProductListPageStyled>
-  );
-}
+  > div:first-of-type {
+    margin-left: 0;
+    padding-left: 0;
+  }
+`;
 
 export default ProductListPage;

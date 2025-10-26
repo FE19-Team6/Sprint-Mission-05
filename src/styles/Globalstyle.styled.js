@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
-  //Reset CSS
+  
   *{
     margin: 0;
     padding: 0;
@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     min-height: 100vh;   
     background: #FCFCFC;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -36,6 +36,8 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
     font-family: inherit;
 }
+
+
 
 `;
 

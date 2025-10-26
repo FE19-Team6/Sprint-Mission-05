@@ -1,11 +1,11 @@
 // 브레이크포인트 정의
-export const device = {
+const device = {
   mobile: `(max-width: 768px)`,
   tablet: `(max-width: 1024px)`,
   desktop: `(min-width: 1025px)`,
 };
 
-export const colors = {
+const colors = {
   // 그레이 스케일
   gray50: "#F9FAFB",
   gray100: "#F3F4F6",
@@ -22,5 +22,209 @@ export const colors = {
   text: "#333333",
 
   // 브랜드 색상
-  brandBlue: "#3692FF",
+  primary100: "#3692FF",
+  primary200: "#1967D6",
+  primary300: "#1251AA",
+};
+
+const typography = {
+  // Text-3xl (32px)
+  text3xl: {
+    bold: {
+      fontFamily: "Pretendard",
+      fontSize: "32px",
+      lineHeight: "42px",
+      fontWeight: "bold",
+    },
+    semibold: {
+      fontFamily: "Pretendard",
+      fontSize: "32px",
+      lineHeight: "42px",
+      fontWeight: "600",
+    },
+  },
+
+  // Text-2xl (24px)
+  text2xl: {
+    bold: {
+      fontFamily: "Pretendard",
+      fontSize: "24px",
+      lineHeight: "32px",
+      fontWeight: "bold",
+    },
+    semibold: {
+      fontFamily: "Pretendard",
+      fontSize: "24px",
+      lineHeight: "32px",
+      fontWeight: "600",
+    },
+    medium: {
+      fontFamily: "Pretendard",
+      fontSize: "24px",
+      lineHeight: "32px",
+      fontWeight: "500",
+    },
+    regular: {
+      fontFamily: "Pretendard",
+      fontSize: "24px",
+      lineHeight: "32px",
+      fontWeight: "400",
+    },
+  },
+
+  // Text-xl (20px)
+  textXl: {
+    bold: {
+      fontFamily: "Pretendard",
+      fontSize: "20px",
+      lineHeight: "32px",
+      fontWeight: "bold",
+    },
+    semibold: {
+      fontFamily: "Pretendard",
+      fontSize: "20px",
+      lineHeight: "32px",
+      fontWeight: "600",
+    },
+    medium: {
+      fontFamily: "Pretendard",
+      fontSize: "20px",
+      lineHeight: "32px",
+      fontWeight: "500",
+    },
+    regular: {
+      fontFamily: "Pretendard",
+      fontSize: "20px",
+      lineHeight: "32px",
+      fontWeight: "400",
+    },
+  },
+
+  // Text-2lg (18px)
+  text2lg: {
+    bold: {
+      fontFamily: "Pretendard",
+      fontSize: "18px",
+      lineHeight: "26px",
+      fontWeight: "bold",
+    },
+    semibold: {
+      fontFamily: "Pretendard",
+      fontSize: "18px",
+      lineHeight: "26px",
+      fontWeight: "600",
+    },
+    medium: {
+      fontFamily: "Pretendard",
+      fontSize: "18px",
+      lineHeight: "26px",
+      fontWeight: "500",
+    },
+    regular: {
+      fontFamily: "Pretendard",
+      fontSize: "18px",
+      lineHeight: "26px",
+      fontWeight: "400",
+    },
+  },
+
+  // Text-lg (16px)
+  textLg: {
+    bold: {
+      fontFamily: "Pretendard",
+      fontSize: "16px",
+      lineHeight: "26px",
+      fontWeight: "bold",
+    },
+    semibold: {
+      fontFamily: "Pretendard",
+      fontSize: "16px",
+      lineHeight: "26px",
+      fontWeight: "600",
+    },
+    medium: {
+      fontFamily: "Pretendard",
+      fontSize: "16px",
+      lineHeight: "26px",
+      fontWeight: "500",
+    },
+    regular: {
+      fontFamily: "Pretendard",
+      fontSize: "16px",
+      lineHeight: "26px",
+      fontWeight: "400",
+    },
+  },
+
+  // Text-md (14px)
+  textMd: {
+    bold: {
+      fontFamily: "Pretendard",
+      fontSize: "14px",
+      lineHeight: "24px",
+      fontWeight: "bold",
+    },
+    semibold: {
+      fontFamily: "Pretendard",
+      fontSize: "14px",
+      lineHeight: "24px",
+      fontWeight: "600",
+    },
+    medium: {
+      fontFamily: "Pretendard",
+      fontSize: "14px",
+      lineHeight: "24px",
+      fontWeight: "500",
+    },
+    regular: {
+      fontFamily: "Pretendard",
+      fontSize: "14px",
+      lineHeight: "24px",
+      fontWeight: "400",
+    },
+  },
+
+  // Text-sm (13px)
+  textSm: {
+    semibold: {
+      fontFamily: "Pretendard",
+      fontSize: "13px",
+      lineHeight: "22px",
+      fontWeight: "600",
+    },
+    medium: {
+      fontFamily: "Pretendard",
+      fontSize: "13px",
+      lineHeight: "22px",
+      fontWeight: "500",
+    },
+  },
+
+  // Text-xs (12px)
+  textXs: {
+    semibold: {
+      fontFamily: "Pretendard",
+      fontSize: "12px",
+      lineHeight: "20px",
+      fontWeight: "600",
+    },
+    medium: {
+      fontFamily: "Pretendard",
+      fontSize: "12px",
+      lineHeight: "18px",
+      fontWeight: "500",
+    },
+    regular: {
+      fontFamily: "Pretendard",
+      fontSize: "12px",
+      lineHeight: "18px",
+      fontWeight: "400",
+    },
+  },
+};
+
+export const theme = {
+  device,
+  colors,
+  typography,
 };
