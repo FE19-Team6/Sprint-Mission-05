@@ -26,7 +26,7 @@
 | **HTTP 통신** | Axios / Fetch |
 | **스타일링** | Tailwind CSS / Styled Components |
 | **패키지 관리** | npm / pnpm |
-| **품질 관리 (선택사항)** | Prettier / ESLint / Husky |
+| **품질 관리 (선택사항, 한다면 airbnb 규칙 적용)** | Prettier / ESLint / Husky |
 
 > - **Prettier:** 자동 코드 포맷팅  
 > - **ESLint:** 일관된 코드 스타일 유지 및 오류 예방  
