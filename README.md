@@ -12,7 +12,7 @@
 - **레포지토리:** `Sprint-Mission-05`  
 - **브랜치 규칙:** 각자 이름으로 브랜치 생성 후, 해당 브랜치 내에서 세부 작업 브랜치를 분기합니다.
   > 예시:  
-  > - `yujin` → `feat/yujin-1차작업`, `feat/yujin-2차작업`  
+  > - `yujin-main` → `yujin/feat/상품 리스트 구현`, `yujin/feat/공통 컴포넌트 제작`  
 
 ---
 
