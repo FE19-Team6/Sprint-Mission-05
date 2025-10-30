@@ -81,5 +81,5 @@ npm run build
 - 기능별 폴더 분리(module, components, hooks)
 - 재사용 가능한 공통 컴포넌트(Button, Layout, Input, Pagination) 중심으로 구성
 - React Router로 페이지 이동 구조 설계 (/, /items, /additem)
-- Tailwind를 학습하여 빠르게 UI 및 라이브러리 스타일링
+- Tailwind를 학습하여 UI 및 라이브러리 스타일링
 - 향후 TypeScript 전환 및 styled-components 통합 리팩토링 예정
