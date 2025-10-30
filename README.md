@@ -1,75 +1,85 @@
-# 🚀 Sprint Mission 05
+# 판다마켓
+중고거래 마켓플레이스 서비스
+사용자가 상품을 등록하고, 최신순·좋아요순으로 정렬하며, 상품 목록을 페이지 단위로 탐색할 수 있습니다.
 
-> **FE19-Team6**의 스프린트 05 프로젝트입니다.  
-> 각자 개인 브랜치에서 기능을 구현하고, 브랜치별로 작업을 관리합니다.
-> main에는 직접 머지하지 않습니다.
+## 프로젝트 구조
+```
+src
+├── api 
+│   └── productApi.jsx
+├── App.jsx 
+├── components  # 공통 UI 컴포넌트 (전역 재사용)
+│   ├── Button.jsx
+│   ├── CardSkeleton.jsx
+│   ├── Header.jsx
+│   ├── Input.jsx
+│   ├── Layout.jsx
+│   └── Pagination.jsx
+├── main.jsx
+├── product # 상품 도메인 전용 폴더
+│   ├── components 
+│   │   ├── ProductCard.jsx
+│   │   └── ProductFilter.jsx
+│   ├── hooks # 데이터/로직 분리용 커스텀 훅
+│   │   ├── BestProductList.js
+│   │   ├── ProductFilter.js
+│   │   └── ProductList.js
+│   ├── modules # 상품 영역 단위 블록 컴포넌트
+│   │   ├── BestProductList.jsx
+│   │   └── GeneralProductList.jsx
+│   ├── pages # 라우터 페이지 단위
+│   │   └── ProductListPage.jsx
+│   └── styles
+│       └── index.scss
+└── styles # 전역 컴포넌트
+    ├── custom.scss
+    └── index.scss
+```
 
----
+## 주요 기능
 
-## 🏗️ 프로젝트 개요
+### 헤더
+- 상단 네비게이션 메뉴
+- 중고마켓 버튼 클릭 시 `/items` 페이지 이동 (빈 페이지)
+- 로그인 및 마이페이지 메뉴 포함
 
-- **조직명:** FE19-Team6  
-- **레포지토리:** `Sprint-Mission-05`  
-- **브랜치 규칙:** 각자 이름으로 브랜치 생성 후, 해당 브랜치 내에서 세부 작업 브랜치를 분기합니다.
-  > 예시:  
-  > - `yujin` → `feat/yujin-1차작업`, `feat/yujin-2차작업`  
+### 메인 페이지
+- **베스트 상품**: 인기 상품만 모아 카드 형태로 출력
+- **전체 상품**: 모든 상품 목록
+  - 검색 필터 (useFilter 훅 기반)
+  - 최신순 및 좋아요순 정렬 기능
+  - 페이지네이션 기능
+  - 상품 등록하기 버튼 클릭 시 `/additem` 이동 (빈 페이지)
 
----
+## 기술 스택
+- **Frontend**: React, JavaScript (TypeScript는 추후 확장)
+- **라우팅**: React Router DOM
+- **HTTP 클라이언트**: Fetch
+- **빌드 도구**: Vite
+- **스타일링**: Tailwind CSS 및 styled-components 혼합
 
-## ⚙️ 기술 스택
+## 시작하기
 
-| 구분 | 사용 기술 |
-|------|------------|
-| **빌드 도구** | Vite |
-| **언어** | TypeScript |
-| **라우팅** | React Router |
-| **HTTP 통신** | Axios / Fetch |
-| **스타일링** | Tailwind CSS / Styled Components |
-| **패키지 관리** | npm / pnpm |
-| **품질 관리 (선택사항, 한다면 airbnb 규칙 적용)** | Prettier / ESLint / Husky |
+### 설치
+```bash
+npm install
+```
 
-> - **Prettier:** 자동 코드 포맷팅  
-> - **ESLint:** 일관된 코드 스타일 유지 및 오류 예방  
-> - **Husky:** 커밋 시 코드 품질 검증
+### 개발 서버 실행
+```bash
+npm run dev
+```
 
----
+### 빌드
+```bash
+npm run build
+```
 
-## 🧩 협업 가이드
+## 개발 노트
 
-- **작업 방식:**  
-  1. `main`에서 개인 브랜치 생성 (예: `yujin`)
-  2. 개인 브랜치 내에서 `feat/` 또는 `fix/` 브랜치 분기
-  3. 세부 브랜치에서 기능 구현 및 커밋
-  4. 각자 브랜치 내에서 코드 리뷰 및 수정 진행  
-     (main에는 직접 머지하지 않습니다)
-  5. 스프린트 종료 후 코드 리뷰용 통합 검토 예정
-
----
-
-## 🗂️ 협업 및 관리 툴
-
-- **이슈 관리:** Jira 🆚 GitHub Milestone  
-- **프로젝트 관리:** GitHub Projects 🆚 Notion  
-- 추후 팀 내에서 도구 통일 예정
-
----
-
-## 📅 스프린트 일정
-
-| 단계 | 일정 |
-|------|------|
-| **개발 기간** | 이번 주 일요일까지 (1주) |
-| **추가 작업 / 코드리뷰 반영** | +3~4일 |
-
----
-
-## 🎨 디자인 시안
-
-- **Figma:** [스프린트 미션 디자인 바로가기](https://www.figma.com/design/IVkRlYWHY74QlgmxqA99Ym/%EC%8A%A4%ED%94%84%EB%A6%B0%ED%8A%B8-%EB%AF%B8%EC%85%98?node-id=348-10201&p=f&t=NFrzysNFP2mgTTV7-0)
-
----
-
-## 📖 참고
-
-> 이번 스프린트는 협업보다는 **개인 단위 개발 중심**,  
-> 브랜치별로 기능을 완성하고 피드백 중심으로 리뷰하는 형태입니다.
+- 학습용 프로젝트로 간결하고 유지보수 쉬운 구조 유지
+- 기능별 폴더 분리(module, components, hooks)
+- 재사용 가능한 공통 컴포넌트(Button, Layout, Input, Pagination) 중심으로 구성
+- React Router로 페이지 이동 구조 설계 (/, /items, /additem)
+- Tailwind를 학습하여 빠르게 UI 및 라이브러리 스타일링
+- 향후 TypeScript 전환 및 styled-components 통합 리팩토링 예정
