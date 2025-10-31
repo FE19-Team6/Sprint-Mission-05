@@ -15,13 +15,13 @@ const Button = ({
   ...props
 }: ButtonProps) => {
   return (
-    <ButtonStyled variant={variant} type={type} {...props}>
+    <ButtonStyled $variant={variant} type={type} {...props}>
       {children}
     </ButtonStyled>
   );
 };
 
-const ButtonStyled = styled("button")<{ variant: "primary" }>`
+const ButtonStyled = styled.button<{ $variant: "primary" }>`
   display: flex;
   height: 42px;
   padding: 12px 23px;

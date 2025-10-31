@@ -4,7 +4,10 @@
     // File Layout
     // "rootDir": "./src",
     // "outDir": "./dist",
-
+     "baseUrl": "src",
+     "paths": {
+      "@/*": ["*"]
+    },
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
     // TypeScript가 import / export 구문을 어떤 방식으로 변환할지 결정합니다.

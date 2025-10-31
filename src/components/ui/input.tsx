@@ -1,8 +1,9 @@
 import type { ComponentPropsWithoutRef } from "react";
 import { styled } from "styled-components";
 
-//props 타입설정
-//개선사항 : label, error추가
+// props 타입설정
+// 개선사항: label, error 추가 예정
+// (현재는 placeholder로 충분하며, form 연동 시 라벨/에러 표시 추가 예정)
 interface InputProps extends ComponentPropsWithoutRef<"input"> {}
 
 const Input = (props: InputProps) => {

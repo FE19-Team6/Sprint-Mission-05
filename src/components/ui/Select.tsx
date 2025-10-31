@@ -2,15 +2,26 @@ import { useState, type ComponentPropsWithoutRef } from "react";
 import styled from "styled-components";
 import ArrowIcon from "@/assets/image/ic_arrow_down.svg";
 
-interface SelectProps extends ComponentPropsWithoutRef<"select"> {
+// 옵션 타입 정의
+interface SelectOption {
+  id: string;
+  label: string;
+}
+
+// 내가 구현한건 진짜 select가 아니고 커스텀이여서 제네릭을 button으로 설정
+interface SelectProps
+  extends Omit<ComponentPropsWithoutRef<"button">, "onClick"> {
   value: string;
-  options: string[];
-  // 내가 구현한건 진짜 select가 아니고 커스텀이여서 React.ChangeEvent같은 이벤트 객체가 없다
-  // 그래서 onChange 사용 불가
+  options: SelectOption[];
   onValueChange: (value: string) => void;
 }
 
-const Select = ({ options = [], value, onValueChange }: SelectProps) => {
+const Select = ({
+  options = [],
+  value,
+  onValueChange,
+  ...props
+}: SelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSelect = (option: string) => {
@@ -18,10 +29,14 @@ const Select = ({ options = [], value, onValueChange }: SelectProps) => {
     setIsOpen(false);
   };
 
+  // 현재 선택된 옵션의 label 찾기
+  const selectedLabel =
+    options.find((opt) => opt.id === value)?.label || "선택하세요";
+
   return (
     <DropdownContainer>
-      <SelectButtonStyled onClick={() => setIsOpen(!isOpen)}>
-        {value || "선택하세요"}
+      <SelectButtonStyled onClick={() => setIsOpen(!isOpen)} {...props}>
+        {selectedLabel}
         <ArrowWrapper $isOpen={isOpen}>
           <img src={ArrowIcon} alt="arrow" width="16" height="16" />
         </ArrowWrapper>
@@ -29,9 +44,12 @@ const Select = ({ options = [], value, onValueChange }: SelectProps) => {
 
       {isOpen && (
         <Dropdown>
-          {options.map((option, i) => (
-            <DropdownItem key={i} onClick={() => handleSelect(option)}>
-              {option}
+          {options.map((option) => (
+            <DropdownItem
+              key={option.id}
+              onClick={() => handleSelect(option.id)}
+            >
+              {option.label}
             </DropdownItem>
           ))}
         </Dropdown>

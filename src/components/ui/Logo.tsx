@@ -1,24 +1,49 @@
-import { styled } from "styled-components";
-import { Link } from "react-router-dom";
+import { styled, css } from "styled-components";
+import { Link, type LinkProps } from "react-router-dom";
 import pandaLogo from "@/assets/image/pandaLogo.svg";
 
-// 메인로고일땐 이렇게 해도 되는데 확장성을 생각하면 to, 이미지크기, 대체 텍스트는 prop으로 받는게 좋을거 같다 아니면 메인이랑 그런용도 로고를 하나 만들자
-const Logo = () => {
+interface LogoProps extends Omit<LinkProps, "to"> {
+  to?: string;
+  src?: string;
+  alt?: string;
+  height?: number;
+}
+
+const Logo = ({
+  to,
+  src = pandaLogo,
+  alt = "판다마켓",
+  height = 40,
+  ...props
+}: LogoProps) => {
+  if (!to) {
+    return (
+      <LogoStyledDiv>
+        <img src={src} alt={alt} height={height} />
+      </LogoStyledDiv>
+    );
+  }
+
   return (
-    <LogoStyled to="/">
-      <img src={pandaLogo} alt="판다마켓" />
-    </LogoStyled>
+    <LogoStyledLink to={to} {...props}>
+      <img src={src} alt={alt} height={height} />
+    </LogoStyledLink>
   );
 };
 
-const LogoStyled = styled(Link)`
-  display: inline-block;
-
+const logoStyles = css`
   img {
-    height: 40px;
     width: auto;
     display: block;
   }
+`;
+
+const LogoStyledLink = styled(Link)`
+  ${logoStyles}
+`;
+
+const LogoStyledDiv = styled.div`
+  ${logoStyles}
 `;
 
 export default Logo;
