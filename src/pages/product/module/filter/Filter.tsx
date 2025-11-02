@@ -1,7 +1,7 @@
 import Button from "@/components/ui/Button";
-import Input from "@/components/ui/input";
+import Input from "@/components/ui/Input";
 import Select from "@/components/ui/Select";
-import useFilter from "@/pages/product/module/filter/uesFilter";
+import useFilter, { type useFilterProps, type SortId } from "./useFilter";
 import styled from "styled-components";
 
 const sortOptions = [
@@ -9,7 +9,7 @@ const sortOptions = [
   { id: "likes", label: "좋아요순" },
 ];
 
-function Filter({ onSearchChange, onSortChange }) {
+const Filter = ({ onSearchChange, onSortChange }: useFilterProps) => {
   const { sort, setSort, searchKeyword, handleSearch } = useFilter({
     onSearchChange,
     onSortChange,
@@ -21,14 +21,18 @@ function Filter({ onSearchChange, onSortChange }) {
       <SearchInput
         type="text"
         placeholder="검색할 상품을 입력해주세요"
-        onChange={handleSearch}
         value={searchKeyword}
+        onChange={handleSearch}
       />
       <RegisterButton type="button">상품 등록하기</RegisterButton>
-      <SortSelect options={sortOptions} value={sort} onValueChange={setSort} />
+      <SortSelect
+        options={sortOptions}
+        value={sort}
+        onValueChange={(v: string) => setSort(v as SortId)}
+      />
     </FilterContainer>
   );
-}
+};
 
 const FilterContainer = styled.div`
   display: flex;

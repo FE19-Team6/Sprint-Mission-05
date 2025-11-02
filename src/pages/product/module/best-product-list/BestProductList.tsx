@@ -1,0 +1,31 @@
+import ProductList from "@/pages/product/components/ProductList";
+import { useProductList } from "@/pages/product/hooks/useProductList";
+
+const BestProductList = () => {
+  const { list, loading, error } = useProductList({
+    page: 1,
+    pageSize: 4,
+    orderBy: "favorite",
+  });
+
+  if (error) return <div>에러가 발생했습니다: {error.message}</div>;
+  if (loading) return <div>로딩 중...</div>;
+
+  return (
+    <ProductList
+      products={list}
+      loading={loading}
+      error={error}
+      // 이미지 개수
+      columns={4} // 데스크톱
+      columnsTablet={2} // 태블릿
+      columnsMobile={1} // 모바일
+      // 이미지 높이
+      imageHeight={282} // 데스크톱
+      imageHeightTablet={343} // 태블릿
+      imageHeightMobile={343} // 모바일
+    />
+  );
+};
+
+export default BestProductList;

@@ -1,13 +1,20 @@
 import { useState, useEffect } from "react";
 
-function useFilter({ onSearchChange, onSortChange }) {
-  const [sort, setSort] = useState("");
+export type SortId = "latest" | "likes";
+
+export interface useFilterProps {
+  onSearchChange: (value: string) => void;
+  onSortChange: (sortId: SortId) => void;
+}
+
+function useFilter({ onSearchChange, onSortChange }: useFilterProps) {
+  const [sort, setSort] = useState<SortId>("latest");
   const [searchKeyword, setSearchKeyword] = useState("");
 
-  const handleSearch = (e) => {
+  // 입력 변경 핸들러 
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     let searchVal = e.target.value;
     setSearchKeyword(searchVal);
-    setQueryParams();
   };
 
   useEffect(() => {
@@ -19,13 +26,11 @@ function useFilter({ onSearchChange, onSortChange }) {
     }, 300);
 
     return () => clearTimeout(timer);
-  }, [searchKeyword, onSearchChange]);
+  }, [searchKeyword]);
 
   useEffect(() => {
-    if (onSortChange && sort) {
-      onSortChange(sort);
-    }
-  }, [sort, onSortChange]);
+    onSortChange(sort);
+  }, [sort]);
 
   return {
     sort,

@@ -4,6 +4,8 @@
     // File Layout
     // "rootDir": "./src",
     // "outDir": "./dist",
+    //대소문자 불일치 감지
+     "forceConsistentCasingInFileNames": true,
      "baseUrl": "src",
      "paths": {
       "@/*": ["*"]
