@@ -14,16 +14,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "pnpm"
-
-      - name: Install pnpm
-        run: npm i -g pnpm@9
+          cache: npm   # ← pnpm 말고 npm
 
       - name: Install deps
-        run: pnpm install --frozen-lockfile
+        run: npm ci   # package-lock.json 있을 때 권장 (없으면 npm install)
 
-      - name: Type check
-        run: pnpm tsc --noEmit
+      - name: Build
+        run: npm run build
+
