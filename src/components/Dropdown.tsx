@@ -1,5 +1,7 @@
-// ✅ Dropdown.tsx
 import { useState } from "react";
+import clsx from "clsx";
+import { twMerge } from "tailwind-merge";
+import { cva } from "class-variance-authority";
 
 interface DropdownProps {
   options: string[];
@@ -10,12 +12,31 @@ interface DropdownProps {
   disabled?: boolean;
 }
 
+// ✅ 상태별 스타일 정의 (cva)
+const dropdownButton = cva(
+  "flex w-80 justify-between items-center px-4 py-3 rounded-lg text-base transition-all duration-150",
+  {
+    variants: {
+      variant: {
+        default: "border border-gray-300 text-gray-800 hover:border-gray-500",
+        open: "border-2 border-gray-500 text-gray-900",
+        error: "border border-red-500 text-gray-800",
+        disabled:
+          "bg-gray-100 border border-gray-300 text-gray-400 cursor-not-allowed",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+);
+
 const Dropdown = ({
   options,
   placeholder = "선택하세요",
   error,
   onSelect,
-  className = "",
+  className,
   disabled = false,
 }: DropdownProps) => {
   const [selected, setSelected] = useState("");
@@ -27,32 +48,32 @@ const Dropdown = ({
     onSelect?.(value);
   };
 
-  const baseButton =
-    "flex w-80 justify-between items-center px-4 py-3 rounded-lg text-base transition-all duration-150";
-  const stateStyles = disabled
-    ? "bg-gray-100 border border-gray-300 text-gray-400 cursor-not-allowed"
+  // ✅ 상태에 따라 variant 지정
+  const variant = disabled
+    ? "disabled"
     : error
-    ? "border border-red-500 text-gray-800"
+    ? "error"
     : isOpen
-    ? "border-2 border-gray-500 text-gray-900"
-    : "border border-gray-300 text-gray-800 hover:border-gray-500";
+    ? "open"
+    : "default";
 
   return (
-    <div className={`relative inline-block ${className}`}>
+    <div className={twMerge("relative inline-block", className)}>
       <button
         type="button"
         disabled={disabled}
         onClick={() => !disabled && setIsOpen(!isOpen)}
-        className={`${baseButton} ${stateStyles}`}
+        className={twMerge(clsx(dropdownButton({ variant })))}
       >
         <span className={selected ? "text-gray-900" : "text-gray-400"}>
           {selected || placeholder}
         </span>
 
         <svg
-          className={`w-4 h-4 text-gray-500 transform transition-transform ${
-            isOpen ? "rotate-180" : ""
-          }`}
+          className={clsx(
+            "w-4 h-4 text-gray-500 transform transition-transform",
+            isOpen && "rotate-180"
+          )}
           fill="none"
           stroke="currentColor"
           strokeWidth={2}
@@ -71,10 +92,10 @@ const Dropdown = ({
           {options.map((opt) => (
             <div
               key={opt}
-              className={`px-4 py-3 text-gray-800 hover:bg-gray-100 cursor-pointer ${
-                selected === opt ? "bg-gray-100 font-medium" : ""
-              }`}
-              onMouseDown={(e) => e.preventDefault()}
+              className={clsx(
+                "px-4 py-3 text-gray-800 hover:bg-gray-100 cursor-pointer",
+                selected === opt && "bg-gray-100 font-medium"
+              )}
               onClick={() => handleSelect(opt)}
             >
               {opt}

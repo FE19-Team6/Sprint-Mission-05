@@ -32,6 +32,7 @@ function Pagination({
     <div className="flex items-center justify-center gap-1">
       {/* ◀ 이전 버튼 */}
       <button
+        type="button"
         className="flex items-center justify-center w-10 h-10 border border-gray-200 rounded-full text-gray-500 font-semibold text-base disabled:opacity-50 disabled:cursor-default"
         disabled={activePageNum === 1}
         onClick={() => onPageChange(activePageNum - 1)}
@@ -43,6 +44,7 @@ function Pagination({
       {pages.map((page) => (
         <button
           key={page}
+          type="button"
           onClick={() => onPageChange(page)}
           className={`flex items-center justify-center w-10 h-10 rounded-full font-semibold text-base border border-gray-200 transition-colors
             ${
@@ -57,6 +59,7 @@ function Pagination({
 
       {/* ▶ 다음 버튼 */}
       <button
+        type="button"
         className="flex items-center justify-center w-10 h-10 border border-gray-200 rounded-full text-gray-500 font-semibold text-base disabled:opacity-50 disabled:cursor-default"
         disabled={activePageNum === totalPageNum}
         onClick={() => onPageChange(activePageNum + 1)}
