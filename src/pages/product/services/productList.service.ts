@@ -1,4 +1,4 @@
-import { getProducts } from "@/api/product/productListApi";
+import getProducts from "@/api/product/productListApi";
 import type { OrderBy } from "@/type/product";
 
 export type ProductListParams = {
