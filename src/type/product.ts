@@ -1,19 +1,14 @@
 export interface Product {
   id: number;
   name: string;
-  description: string;
-  price: number;
-  tags: string[];
-  imageUrls: string[];       
+  price: number;   
   images: string[]; 
-  ownerId: number;
   favoriteCount: number;
-  createdAt: string;
-  updatedAt: string;
 }
 
 export type OrderBy = "recent" | "favorite"
 
+//서버 응답 스키마
 export interface ProductListResponse {
   list: Product[];
   totalCount: number;

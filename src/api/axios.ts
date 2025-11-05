@@ -9,7 +9,7 @@ const axiosApi = axios.create({
 //response에는 서버에서 응답이 returne전 인터셉터로 가로채서 원하는 작업들을 추가할수있다.
 //이거 안하면 api많이 늘어났을때 오류처리를 왕 마니 중복으로 해야함
 axiosApi.interceptors.response.use(
-  (res) => res,
+  (res) => res.data,
   (err) => {
     const message =
     err.response?.data?.message ||

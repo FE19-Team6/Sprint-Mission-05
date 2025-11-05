@@ -3,19 +3,11 @@ import ProductCard from "@/pages/product/components/ProductCard";
 import type { Product } from "@/type/product";
 
 type ProductListProps = {
-  products: Array<
-    Pick<Product, "id" | "name" | "price" | "favoriteCount"> & {
-      images: string[];
-    }
-  >;
-  columns?: number;
-  loading?: boolean;
-  error?: string | Error | null;
-  columnsTablet?: number;
-  columnsMobile?: number;
-  imageHeight?: number;
-  imageHeightTablet?: number;
-  imageHeightMobile?: number;
+  products: Product[];
+  columns: number;
+  columnsTablet: number;
+  columnsMobile: number;
+  variant?: "best" | "default";
 };
 
 interface GridProps {
@@ -27,25 +19,11 @@ interface GridProps {
 const ProductList = ({
   products,
   columns = 4,
-  loading,
-  error,
   columnsTablet = 2,
   columnsMobile = 1,
-  imageHeight,
-  imageHeightTablet,
-  imageHeightMobile,
+  variant = "default",
 }: ProductListProps) => {
-  if (loading) {
-    return <div>로딩 중...</div>;
-  }
-
-  if (error) {
-    const msg =
-      typeof error === "string" ? error : error?.message || "알 수 없는 오류";
-    return <div>에러: {msg}</div>;
-  }
-
-  if (!products || !Array.isArray(products) || products.length === 0) {
+  if (!products || products.length === 0) {
     return <div>상품이 없습니다.</div>;
   }
   return (
@@ -61,13 +39,7 @@ const ProductList = ({
           name={name}
           price={price}
           favoriteCount={favoriteCount}
-          {...(imageHeight !== undefined ? { height: imageHeight } : {})}
-          {...(imageHeightTablet !== undefined
-            ? { heightTablet: imageHeightTablet }
-            : {})}
-          {...(imageHeightMobile !== undefined
-            ? { heightMobile: imageHeightMobile }
-            : {})}
+          variant={variant}
         />
       ))}
     </ProductListStyled>

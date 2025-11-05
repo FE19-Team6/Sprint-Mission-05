@@ -1,21 +1,11 @@
 import { useEffect, useState } from "react";
-import getProducts from "@/api/product/productListApi";
-import type { Product, OrderBy } from "@/type/product";
+import type { Product } from "@/type/product";
+import { fetchProductList, type ProductListParams } from "../services/productList.service";
 
-interface UseProductListParams {
-  page?: number;
-  pageSize?: number;
-  orderBy?: OrderBy;
-  keyword?: string;
-}
-
-export const useProductList = ({
-  page = 1,
-  pageSize = 10,
-  orderBy = "recent",
-  keyword = "",
-}: UseProductListParams = {}) => {
-  const [products, setProducts] = useState<{list: Product[]; totalCount: number}>({ list: [], totalCount: 0 });
+export const useProductList = (params:ProductListParams = {}) => {
+  const { page = 1, pageSize = 10, orderBy = "recent", keyword = "" } = params;
+  const [total, setTotal] = useState(0)
+  const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
@@ -24,17 +14,14 @@ export const useProductList = ({
       try {
         setLoading(true);
         setError(null);
-        const { list, totalCount } = await getProducts({
-          page,
-          pageSize,
-          orderBy,
-          keyword,
-        });
-        setProducts({ list, totalCount });
+        const { list, totalCount } = await fetchProductList({ page, pageSize, orderBy, keyword });
+        setProducts(list);
+        setTotal(totalCount);
       } catch (e) {
-         // 인터셉터가 Error로 던지므로 그대로 저장
+        // 인터셉터가 Error로 던지므로 그대로 저장
         setError(e as Error);
-        setProducts({list: [], totalCount: 0})
+        setProducts([])
+        setTotal(0);
       } finally {
         setLoading(false);
       }
@@ -43,8 +30,5 @@ export const useProductList = ({
     loadProducts();
   }, [page, pageSize, orderBy, keyword]);
 
-  return { ...products, loading, error };
+  return { products, total, loading, error };
 }
-
-// UseProductListParams -> UseProductListParams = {}로 수정한이유
-// 인자를 전달하지 않고도 호출가능, 빈객체를 구조분해 하게 되어서 가능한거다

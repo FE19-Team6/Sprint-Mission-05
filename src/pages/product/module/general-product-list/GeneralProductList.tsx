@@ -18,13 +18,9 @@ const GeneralProductList = () => {
   const PAGE_SIZE = 10;
   const totalPages = Math.max(1, Math.ceil(totalCount / PAGE_SIZE));
 
-  console.log("🔍 디버깅:", {
-    totalCount,
-    PAGE_SIZE,
-    totalPages,
-    currentPage,
-    products: products.length,
-  });
+  if (error) return <div>에러가 발생했습니다: {error.message}</div>;
+  if (loading) return <div>로딩 중...</div>;
+  if (products.length === 0) return <div>상품이 없습니다.</div>;
 
   return (
     <>
@@ -34,16 +30,12 @@ const GeneralProductList = () => {
       />
       <ProductList
         products={products}
-        loading={loading}
-        error={error}
         // 이미지 개수
         columns={5} //데스크톱
         columnsTablet={3} //태블릿
         columnsMobile={2} //모바일
-        //이미지 높이
-        imageHeight={221} // 데스크톱
-        imageHeightTablet={221} // 태블릿
-        imageHeightMobile={168} // 모바일
+        // 이미지 높이
+        variant="default"
       />
       <Pagination
         currentPage={currentPage}

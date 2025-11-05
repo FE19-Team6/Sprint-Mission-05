@@ -14,7 +14,7 @@ const {
   } = useProductQueryState({pageSize: 10, orderBy: "recent"})
 
   // 받아온 대로 정렬하기
-  const {list, loading, error, totalCount} = useProductList({
+  const {products, loading, error, total} = useProductList({
     page: currentPage,
     pageSize,
     keyword: searchKeyword,
@@ -30,8 +30,8 @@ const {
     currentPage,
     pageSize,
     // 데이터
-    products: list || [],
-    totalCount: totalCount || 0,
+    products: products || [],
+    totalCount: total || 0,
     loading: loading || false,
     error: error || null,
   };

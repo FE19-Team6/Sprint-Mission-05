@@ -5,35 +5,20 @@ type ProductCardProps = {
   images: string[];
   price: number;
   favoriteCount: number;
-  height?: number | undefined;
-  heightTablet?: number | undefined;
-  heightMobile?: number | undefined;
+  variant?: "best" | "default";
 };
-
-interface StyledProps {
-  $height?: number;
-  $heightTablet?: number;
-  $heightMobile?: number;
-}
 
 const ProductCard = ({
   name,
   images,
   price,
   favoriteCount,
-  height,
-  heightTablet,
-  heightMobile,
+  variant = "default",
 }: ProductCardProps) => {
-  const thumbnailUrl = images?.[0] ?? "";
+  const thumbnailUrl = images?.[0] || "/placeholder.png";
 
   return (
-    //undefined일때 prop 안보내기
-    <ProductCardStyled
-      {...(height !== undefined ? { $height: height } : {})}
-      {...(heightTablet !== undefined ? { $heightTablet: heightTablet } : {})}
-      {...(heightMobile !== undefined ? { $heightMobile: heightMobile } : {})}
-    >
+    <ProductCardStyled $variant={variant}>
       <img src={thumbnailUrl} alt={name} />
       <div className="product-info">
         <h3>{name}</h3>
@@ -46,7 +31,7 @@ const ProductCard = ({
 
 // ----- styles -----
 
-const ProductCardStyled = styled.li<StyledProps>`
+const ProductCardStyled = styled.li<{ $variant: "best" | "default" }>`
   background: #fff;
   border-radius: 8px;
   overflow: hidden;
@@ -56,32 +41,23 @@ const ProductCardStyled = styled.li<StyledProps>`
     object-fit: cover;
     display: block;
 
-    // 데스크톱
-    @media ${({ theme }) => theme.device.desktop} {
-      height: ${(props) => (props.$height ? `${props.$height}px` : "auto")};
-    }
+    // 베스트 상품
+    ${({ $variant, theme }) =>
+      $variant === "best" &&
+      `
+      @media ${theme.device.desktop} { height: 282px; }
+      @media ${theme.device.tablet}  { height: 343px; }
+      @media ${theme.device.mobile}  { height: 343px; }
+    `}
 
-    // 태블릿
-    @media ${({ theme }) => theme.device.tablet} {
-      height: ${(props) =>
-        props.$heightTablet
-          ? `${props.$heightTablet}px`
-          : props.$height
-          ? `${props.$height}px`
-          : "auto"};
-    }
-
-    // 모바일
-    @media ${({ theme }) => theme.device.mobile} {
-      height: ${(props) =>
-        props.$heightMobile
-          ? `${props.$heightMobile}px`
-          : props.$heightTablet
-          ? `${props.$heightTablet}px`
-          : props.$height
-          ? `${props.$height}px`
-          : "auto"};
-    }
+    // 일반 상품
+    ${({ $variant, theme }) =>
+      $variant === "default" &&
+      `
+      @media ${theme.device.desktop} { height: 200px; }
+      @media ${theme.device.tablet}  { height: 250px; }
+      @media ${theme.device.mobile}  { height: 250px; }
+    `}
   }
 
   .product-info {
