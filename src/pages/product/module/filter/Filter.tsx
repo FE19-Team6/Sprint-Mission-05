@@ -1,15 +1,15 @@
 import Button from "@/components/ui/Button";
-import Input from "@/components/ui/input";
-import Select from "@/components/ui/Select";
-import useFilter from "@/pages/product/module/filter/uesFilter";
+import Input from "@/components/ui/Input";
+import Select, { type SelectProps } from "@/components/ui/Select";
+import useFilter, { type useFilterProps, type SortId } from "./useFilter";
 import styled from "styled-components";
 
-const sortOptions = [
+const sortOptions: Array<{ id: SortId; label: string }> = [
   { id: "latest", label: "최신순" },
   { id: "likes", label: "좋아요순" },
 ];
 
-function Filter({ onSearchChange, onSortChange }) {
+const Filter = ({ onSearchChange, onSortChange }: useFilterProps) => {
   const { sort, setSort, searchKeyword, handleSearch } = useFilter({
     onSearchChange,
     onSortChange,
@@ -21,14 +21,18 @@ function Filter({ onSearchChange, onSortChange }) {
       <SearchInput
         type="text"
         placeholder="검색할 상품을 입력해주세요"
-        onChange={handleSearch}
         value={searchKeyword}
+        onChange={handleSearch}
       />
       <RegisterButton type="button">상품 등록하기</RegisterButton>
-      <SortSelect options={sortOptions} value={sort} onValueChange={setSort} />
+      <SortSelect<SortId>
+        options={sortOptions}
+        value={sort}
+        onValueChange={setSort}
+      />
     </FilterContainer>
   );
-}
+};
 
 const FilterContainer = styled.div`
   display: flex;
@@ -58,7 +62,9 @@ const RegisterButton = styled(Button)`
   white-space: nowrap;
 `;
 
-const SortSelect = styled(Select)`
+const SortSelect = styled((props: SelectProps<SortId>) => (
+  <Select<SortId> {...props} />
+))`
   min-width: 120px;
 `;
 

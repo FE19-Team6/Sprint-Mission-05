@@ -9,22 +9,22 @@ interface SelectOption {
 }
 
 // 내가 구현한건 진짜 select가 아니고 커스텀이여서 제네릭을 button으로 설정
-interface SelectProps
+export interface SelectProps<T extends string>
   extends Omit<ComponentPropsWithoutRef<"button">, "onClick"> {
-  value: string;
-  options: SelectOption[];
-  onValueChange: (value: string) => void;
+  value: T;
+  options: Array<{ id: T; label: string }>;
+  onValueChange: (value: T) => void;
 }
 
-const Select = ({
+const Select = <T extends string>({
   options = [],
   value,
   onValueChange,
   ...props
-}: SelectProps) => {
+}: SelectProps<T>) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleSelect = (option: string) => {
+  const handleSelect = (option: T) => {
     onValueChange(option);
     setIsOpen(false);
   };
@@ -47,7 +47,7 @@ const Select = ({
           {options.map((option) => (
             <DropdownItem
               key={option.id}
-              onClick={() => handleSelect(option.id)}
+              onClick={() => handleSelect(option.id as T)}
             >
               {option.label}
             </DropdownItem>
