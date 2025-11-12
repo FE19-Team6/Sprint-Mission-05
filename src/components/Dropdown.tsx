@@ -12,7 +12,6 @@ interface DropdownProps {
   disabled?: boolean;
 }
 
-// ✅ 상태별 스타일 정의 (cva)
 const dropdownButton = cva(
   "flex w-80 justify-between items-center px-4 py-3 rounded-lg text-base transition-all duration-150",
   {
@@ -48,7 +47,6 @@ const Dropdown = ({
     onSelect?.(value);
   };
 
-  // ✅ 상태에 따라 variant 지정
   const variant = disabled
     ? "disabled"
     : error
