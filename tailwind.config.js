@@ -2,6 +2,19 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: "4rem",
+        sm: "1rem",
+        md: "2rem",
+        lg: "3rem",
+        xl: "4rem",
+      },
+      screens: {
+        xl: "1800px",
+      },
+    },
     extend: {
       // 컬러 정의
       colors: {
@@ -44,5 +57,5 @@ export default {
       },
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [],
 };

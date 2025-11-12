@@ -1,6 +1,15 @@
+import { useNavigate } from "react-router-dom";
+
 function Button() {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/additem");
+  };
+
   return (
     <button
+      onClick={handleClick}
       className="
         w-[133px] h-[42px]
         bg-primary-700 

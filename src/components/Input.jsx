@@ -34,12 +34,13 @@ export default function Input() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="검색할 상품을 입력해주세요"
-        className="bg-gray-100 rounded-[8px] px-10 w-full h-full focus:outline-none"
-        aria-label="상품 검색 입력창"
+        className="bg-gray-100 rounded-[8px] px-10 w-full h-full border border-gray-100 
+        focus:border-gray-400 focus:border-[1px] outline-none"
       />
 
       {query && (
         <button
+          type="button"
           onClick={deleteHandler}
           className="absolute right-3 cursor-pointer"
           aria-label="입력 내용 삭제"
