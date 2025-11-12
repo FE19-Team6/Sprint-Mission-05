@@ -3,7 +3,6 @@ import { Link, NavLink } from "react-router-dom";
 import Logo from "../assets/logo.svg";
 import LoginLogo from "../assets/LoginLogo.png";
 
-// NavLink의 isActive 속성에 타입 지정
 function getLinkStyle({
   isActive,
 }: {

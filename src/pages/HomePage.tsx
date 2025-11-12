@@ -1,22 +1,16 @@
-import Dropdown from "../components/Dropdown";
-import Pagination from "../components/Pagination";
+import BestProduct from "./components/BestProduct";
+import AllProduct from "./components/AllProduct";
 
-function HomePage() {
+const HomePage = () => {
   return (
-    <div className="flex flex-col items-center gap-8">
-      <Dropdown
-        options={["최신순", "인기순", "댓글순"]}
-        placeholder="정렬 기준 선택"
-        onSelect={(val) => console.log("선택됨:", val)}
-      />
+    <div className="w-full min-h-screen bg-gray-50 px-4 md:px-8 lg:px-16">
+      {/* 베스트 상품 섹션 */}
+      <BestProduct />
 
-      <Pagination
-        totalPageNum={10}
-        activePageNum={3}
-        onPageChange={(page) => console.log("페이지 이동:", page)}
-      />
+      {/* 전체 상품 섹션 */}
+      <AllProduct />
     </div>
   );
-}
+};
 
 export default HomePage;

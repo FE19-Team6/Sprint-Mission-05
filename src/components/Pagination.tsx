@@ -1,4 +1,3 @@
-import React from "react";
 import LeftArrow from "../assets/arrow_left.svg";
 import RightArrow from "../assets/arrow_right.svg";
 
