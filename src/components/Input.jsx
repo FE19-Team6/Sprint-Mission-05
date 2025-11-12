@@ -1,62 +1,56 @@
 import { useState } from "react";
+import useResponsive from "@/products/hooks/useResponsive";
 
-function Input() {
+export default function Input() {
   const [query, setQuery] = useState("");
+  const searchIcon = "/assets/search.svg";
+  const deleteIcon = "/assets/delete.svg";
 
-  // 입력값에서 공백을 제거한 문자열 (빈칸만 입력 시 false로 처리됨)
-  const normalized = query.trim();
+  // 반응형 훅
+  const device = useResponsive();
+  const isMobile = device === "mobile";
+  const isTablet = device === "tablet";
 
-  // 아이콘 이미지 경로
-  const searchImg = "/assets/search.svg";
-  const deleteImg = "/assets/delete.svg";
-
-  // 삭제버튼 : 클릭 시 입력값 초기화
-  const deleteHandler = () => {
-    setQuery("");
-  };
+  const deleteHandler = () => setQuery("");
 
   return (
-    // 인풋 전체 영역
-    <div className="relative w-[325px]">
-      <input
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder="검색할 상품을 입력해주세요."
-        className="
-          w-full h-[42px]
-          bg-gray-100
-          px-10
-          text-lg text-gray-600
-          rounded-lg
-          outline-none
-          border border-transparent
-          focus:border-primary-700
-          "
+    <div
+      className={`flex items-center  relative ${
+        isMobile
+          ? "w-full h-[42px]"
+          : isTablet
+          ? "w-full h-[42px]"
+          : "w-[260px] h-[42px]"
+      }`}
+    >
+      <img
+        src={searchIcon}
+        alt="돋보기 아이콘"
+        className="absolute left-3 w-[22px] h-[22px]"
       />
 
-      {/* 돋보기 아이콘 : 왼쪽 고정 위치 */}
-      <img
-        src={searchImg}
-        className="absolute w-[24px] h-[24px] left-3 top-1/2 -translate-y-1/2"
-      ></img>
+      <input
+        type="text"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="검색할 상품을 입력해주세요"
+        className="bg-gray-100 rounded-[8px] px-10 w-full h-full focus:outline-none"
+        aria-label="상품 검색 입력창"
+      />
 
-      {/* 입력값이 있을 때만 삭제버튼 표시됨 */}
-      {normalized && (
-        <img
+      {query && (
+        <button
           onClick={deleteHandler}
-          src={deleteImg}
-          className="
-          absolute 
-          w-[16px] h-[16px] 
-          right-3 top-1/2 -translate-y-1/2 
-          hover:opacity-100
-          opacity-60 
-          cursor-pointer 
-          "
-        ></img>
+          className="absolute right-3 cursor-pointer"
+          aria-label="입력 내용 삭제"
+        >
+          <img
+            src={deleteIcon}
+            alt="삭제 아이콘"
+            className="w-[14px] h-[14px]"
+          />
+        </button>
       )}
     </div>
   );
 }
-
-export default Input;

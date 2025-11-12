@@ -1,22 +1,11 @@
-import Header from "@/components/Header";
-import Button from "@/components/Button";
 import Layout from "@/components/Layout";
-import Input from "@/components/Input";
-import Pagination from "@/components/Pagination";
+import ProductListPage from "./products/pages/ProductListPage";
 
 function App() {
   return (
     <div>
-      <Header />
       <Layout>
-        <Button />
-        <br />
-        <br />
-        <Input />
-        <br />
-        <Pagination />
-        <br />
-        <br />
+        <ProductListPage />
       </Layout>
     </div>
   );
