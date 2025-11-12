@@ -1,41 +1,62 @@
-export default function Header() {
-  return (
-    <header className="w-full bg-white shadow-sm">
-      {/* 중앙 정렬 및 내부 패딩 조정 (반응형 여백) */}
-      <div
-        className="
-          max-w-[1920px] mx-auto 
-          flex justify-between items-center 
-          px-6 sm:px-10 md:px-16 lg:px-28 
-          py-4
-        "
-      >
-        {/* 로고 및 네비게이션 메뉴 */}
-        <div className="flex items-center gap-8">
-          <img
-            src="/assets/logo.svg"
-            alt="판다마켓 로고"
-            className="w-[150px] h-[48px] cursor-pointer"
-          />
+import { Link, useLocation } from "react-router-dom";
 
-          <nav className="flex items-center gap-8 text-gray-800 text-lg">
-            <span className="cursor-pointer hover:text-primary-700 font-semibold">
+export default function Header() {
+  const location = useLocation();
+
+  // 현재 경로 확인
+  const path = location.pathname;
+
+  // 각 메뉴 활성화 상태 확인
+  const isBoardActive = path === "/board";
+  const isMarketActive = path === "/items" || path === "/additem";
+
+  return (
+    <header className="bg-white border-b border-gray-200 shadow-sm">
+      {/* container로 Layout과 폭 통일 */}
+      <div className="container flex justify-between items-center py-4">
+        {/* 로고 + 네비게이션 묶음 */}
+        <div className="flex items-center gap-3">
+          {/* 로고 클릭 시 홈으로 이동 */}
+          <Link to="/">
+            <img
+              src="/assets/logo.svg"
+              alt="판다마켓 로고"
+              className="w-[144px] h-[42px] cursor-pointer"
+            />
+          </Link>
+
+          {/* 메뉴 */}
+          <nav className="flex items-center gap-5 text-xl font-semibold">
+            <Link
+              to="/board"
+              className={`cursor-pointer transition-colors ${
+                isBoardActive
+                  ? "text-[#3692FF]"
+                  : "text-gray-800 hover:text-primary-700"
+              }`}
+            >
               자유게시판
-            </span>
-            <span className="cursor-pointer hover:text-primary-700 font-semibold">
+            </Link>
+
+            <Link
+              to="/items"
+              className={`cursor-pointer transition-colors ${
+                isMarketActive
+                  ? "text-[#3692FF]"
+                  : "text-gray-800 hover:text-primary-700"
+              }`}
+            >
               중고마켓
-            </span>
+            </Link>
           </nav>
         </div>
 
         {/* 프로필 아이콘 */}
-        <div>
-          <img
-            src="/assets/thumbnail.svg"
-            alt="프로필"
-            className="w-10 h-10 bg-gray-100 rounded-full cursor-pointer"
-          />
-        </div>
+        <img
+          src="/assets/thumbnail.svg"
+          alt="프로필"
+          className="w-10 h-10 bg-gray-100 rounded-full cursor-pointer"
+        />
       </div>
     </header>
   );

@@ -1,24 +1,21 @@
-import Header from "@/components/Header";
-import Button from "@/components/Button";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "@/components/Layout";
-import Input from "@/components/Input";
-import Pagination from "@/components/Pagination";
+import ProductListPage from "@/products/pages/ProductListPage";
+import AddItemPage from "@/products/pages/AddItemPage";
+import BoardPage from "@/products/pages/BoardPage";
 
 function App() {
   return (
-    <div>
-      <Header />
-      <Layout>
-        <Button />
-        <br />
-        <br />
-        <Input />
-        <br />
-        <Pagination />
-        <br />
-        <br />
-      </Layout>
-    </div>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/" element={<Navigate to="/items" replace />} />
+
+        <Route path="/" element={<ProductListPage />} />
+        <Route path="/board" element={<BoardPage />} />
+        <Route path="/items" element={<ProductListPage />} />
+        <Route path="/additem" element={<AddItemPage />} />
+      </Route>
+    </Routes>
   );
 }
 
